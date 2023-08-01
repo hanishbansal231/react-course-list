@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Navbar from "./components/Navbar";
+import { filterList, urlApi } from "./data";
+import Filter from "./components/Filter";
+import { useState, useEffect } from 'react';
+import Cards from "./components/Cards";
 function App() {
+  const [filterData, setData] = useState(filterList);
+  const [courses, setCourse] = useState([]);
+  async function fetchData() {
+    try {
+      const res = await fetch(urlApi);
+      const data = await res.json();
+      setCourse(data.data);
+    } catch (err) {
+      console.loge(err);
+    }
+  }
+  useEffect(() => {
+    fetchData()
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <Filter filterList={filterData} />
+      <Cards courses={courses} />
     </div>
   );
 }
