@@ -39,6 +39,14 @@ body {
   background: #209cd8;
   box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 10px;
   cursor: pointer;
+  border: 1px solid transparent;
+  opacity: .7;
+  transition: all .5s linear;
+}
+
+.btn.active {
+  border: 1px solid #fff;
+  opacity: 1;
 }
 
 .cards {
@@ -46,11 +54,10 @@ body {
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   min-height: 100vh;
-  gap: 2rem;
+  gap: 1.3rem;
   flex-wrap: wrap;
-  padding: 3rem 0;
+  padding-bottom: 3rem;
 }
 
 .card {
@@ -98,8 +105,103 @@ body {
   border: none;
   outline: none;
 }
-.showMore{
+
+.showMore {
   color: #209cd8;
   cursor: pointer;
   font-size: 1.2rem;
+}
+
+.spinnerBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 50vh;
+}
+
+.custom-loader {
+  width: 50px;
+  height: 50px;
+  display: grid;
+}
+
+.custom-loader::before,
+.custom-loader::after {
+  content: "";
+  grid-area: 1/1;
+  --c: radial-gradient(farthest-side, #766DF4 92%, #0000);
+  background:
+    var(--c) 50% 0,
+    var(--c) 50% 100%,
+    var(--c) 100% 50%,
+    var(--c) 0 50%;
+  background-size: 12px 12px;
+  background-repeat: no-repeat;
+  animation: s2 1s infinite;
+}
+
+.custom-loader::before {
+  margin: 4px;
+  filter: hue-rotate(45deg);
+  background-size: 8px 8px;
+  animation-timing-function: linear
+}
+
+@keyframes s2 {
+  100% {
+    transform: rotate(.5turn)
+  }
+}
+
+.spinnerBox p {
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  margin-top: .5rem;
+}
+.empty{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 50vh;
+}
+.empty div{
+  font-size: 3rem;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: #122a43;
+}
+@media (max-width: 650px) {
+  .btn {
+    padding: .5rem .9rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .btn {
+    padding: .5rem .8rem;
+    font-size: .9rem;
+  }
+}
+@media (max-width: 500px) {
+  .btn {
+    padding: .5rem .7rem;
+    font-size: .8rem;
+  }
+}
+@media (max-width: 450px) {
+  .btn {
+    padding: .5rem .5rem;
+    font-size: .7rem;
+  }
+  .card {
+    width: 320px;
+}
+.description {
+  font-size: .9rem;
+}
+.cardHeading {
+  font-size: 1rem;
+}
 }
